@@ -11,6 +11,7 @@ use PDF;
 
 class MemberController extends Controller
 {
+    const RESULTS_IN_PAGE = 5;
     public function __construct()
     {
         $this->middleware('auth');
@@ -22,10 +23,22 @@ class MemberController extends Controller
      */
     public function index(Request $request)
     {
-        $members = Member::orderBy('surname')->get();
+        $members = Member::orderBy('surname')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
         $reservoirs = Reservoir::orderBy('title')->get();
         if ($request->filter && 'reservoir' == $request->filter) {
-            $members = Member::where('reservoir_id', $request->reservoir_id)->get();
+            $members = Member::where('reservoir_id', $request->reservoir_id)->paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        }
+        elseif ($request->sort && 'name' == $request->sort) {
+            $members = Member::orderBy('name')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        }
+        elseif ($request->sort && 'surname' == $request->sort) {
+            $members = Member::orderBy('surname')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        }
+        elseif ($request->sort && 'live' == $request->sort) {
+            $members = Member::orderBy('live')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        }
+        elseif ($request->sort && 'new' == $request->sort) {
+            $members = Member::orderBy('created_at', 'desc')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
         }
         return view('member.index', ['members' => $members, 'reservoirs' => $reservoirs, 'reservoir_id' => $request->reservoir_id ?? '0']);
     }

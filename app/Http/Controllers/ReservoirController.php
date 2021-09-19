@@ -11,6 +11,7 @@ use PDF;
 
 class ReservoirController extends Controller
 {
+    const RESULTS_IN_PAGE = 5;
     public function __construct()
     {
         $this->middleware('auth');
@@ -23,7 +24,7 @@ class ReservoirController extends Controller
      */
     public function index()
     {
-        $reservoirs = Reservoir::orderBy('area')->get();
+        $reservoirs = Reservoir::orderBy('area', 'DESC')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
         return view('reservoir.index', ['reservoirs' => $reservoirs]);
     }
 
@@ -49,7 +50,7 @@ class ReservoirController extends Controller
         [
             'reservoir_title' => ['required', 'min:3', 'max:100'],
             'reservoir_area' => ['required','numeric', 'min:3', 'max:150'],
-            'reservoir_about' => ['required', 'min:200',  'max:500'],
+            'reservoir_about' => ['sometimes',  'max:500'],
         ]);
         if ($validator->fails()) {
             $request->flash();

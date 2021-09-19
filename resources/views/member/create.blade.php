@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>experience:</label>
+                                <label>Experience:</label>
                                 <input type="text" name="member_experience" class="form-control"
                                     value="{{ old('member_experience') }}">
                                 <small class="form-text text-muted">Enter experience</small>

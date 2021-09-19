@@ -23,6 +23,8 @@
                                 </div>
                             </div>
                         @endforeach
+                        <div class="mt-3 pagination-dark justify-content-center pagination-md d-flex flex-sm-wrap">
+                            {{ $reservoirs->onEachSide(0)->links() }}</div>
                     </div>
                 </div>
             </div>
