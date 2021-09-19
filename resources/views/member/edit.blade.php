@@ -49,7 +49,7 @@
                                 <label>Reservoir:</label>
                                 <select name="reservoir_id">
                                     @foreach ($reservoirs as $reservoir)
-                                        <option value="{{ $reservoir->id }}">{{ $reservoir->title }}
+                                        <option value="{{ $reservoir->id }}" @if($reservoir->id == $member->reservoir_id) selected @endif>{{ $reservoir->title }}
                                             {{ $reservoir->area }}
                                         </option>
                                     @endforeach

@@ -14,7 +14,7 @@
                                 <div class="block">
                                     <div class="form-group">
                                         <select class="form-control" name="reservoir_id">
-                                            <option value="0" disabled selected>Select Master</option>
+                                            <option value="0" disabled selected>Select Member</option>
                                             @foreach ($reservoirs as $reservoir)
                                                 <option value="{{ $reservoir->id }}" @if ($reservoir_id == $reservoir->id) selected @endif>
                                                     {{ $reservoir->title }} </option>
