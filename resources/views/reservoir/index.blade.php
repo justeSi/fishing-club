@@ -15,10 +15,10 @@
                                     <form method="POST" action="{{ route('reservoir.destroy', [$reservoir]) }}">
                                         @csrf
                                         <a href="{{ route('reservoir.show', [$reservoir]) }}"
-                                            class="btn btn-dark btn-sm">VIEW</a>
+                                            class="btn btn-dark btn-sm"  title="View"><i class="fas fa-binoculars"></i></a>
                                         <a href="{{ route('reservoir.edit', [$reservoir]) }}"
-                                            class="btn btn-dark btn-sm">EDIT</a>
-                                        <button type="submit" class="btn btn-dark btn-sm">DELETE</button>
+                                            class="btn btn-dark btn-sm" title="Edit"><i class="far fa-edit" ></i></a>
+                                        <button type="submit" class="btn btn-dark btn-sm" title="Delete"><i class="fas fa-trash" ></i></button>
                                     </form>
                                 </div>
                             </div>

@@ -77,7 +77,6 @@ class MemberController extends Controller
         }
         $member = new Member;
         
-        // $member->name = mb_convert_case($request->member_name, MB_CASE_TITLE, 'UTF-8');
         
         $member->name = mb_convert_case($request->member_name, MB_CASE_TITLE, 'UTF-8');
         $member->surname = mb_convert_case($request->member_surname, MB_CASE_TITLE, 'UTF-8');
@@ -87,7 +86,7 @@ class MemberController extends Controller
         $member->reservoir_id = $request->reservoir_id;
         
         $member->save();
-        return redirect()->route('member.index')->with('success_message', 'Sekmingai įrašytas.');
+        return redirect()->route('member.index')->with('success_message', 'Successfully created.');
     }
 
     /**
@@ -136,17 +135,16 @@ class MemberController extends Controller
             return redirect()->back()->withErrors($validator);
         }
         
-        $member->name = mb_convert_case($request->member_name, MB_CASE_TITLE, 'UTF-8');
         
-        // $member->name = mb_convert_case($request->member_name, MB_CASE_TITLE, 'UTF-8');
-        // $member->surname = mb_convert_case($request->member_surname, MB_CASE_TITLE, 'UTF-8');
-        // $member->live = mb_convert_case($request->member_live, MB_CASE_TITLE, 'UTF-8');
-        // $member->experience = $request->member_experience;
-        // $member->registered = $request->member_registered;
-        // $member->reservoir_id = $request->reservoir_id;
+        $member->name = mb_convert_case($request->member_name, MB_CASE_TITLE, 'UTF-8');
+        $member->surname = mb_convert_case($request->member_surname, MB_CASE_TITLE, 'UTF-8');
+        $member->live = mb_convert_case($request->member_live, MB_CASE_TITLE, 'UTF-8');
+        $member->experience = $request->member_experience;
+        $member->registered = $request->member_registered;
+        $member->reservoir_id = $request->reservoir_id;
         
         $member->save();
-        return redirect()->route('member.index')->with('success_message', 'Sėkmingai pakeistas.');
+        return redirect()->route('member.index')->with('success_message', 'Successfully updated.');
     }
 
     /**
@@ -158,6 +156,6 @@ class MemberController extends Controller
     public function destroy(Member $member)
     {
         $member->delete();
-        return redirect()->route('member.index')->with('success_message', 'Sekmingai ištrintas.');
+        return redirect()->route('member.index')->with('success_message', 'Successfully removed.');
     }
 }

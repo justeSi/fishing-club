@@ -55,8 +55,8 @@
                                     <div class="btn-group d-flex">
                                         @csrf
                                         <a href="{{ route('member.edit', [$member]) }}"
-                                            class="btn btn-dark btn-sm m-1">EDIT</a>
-                                        <button type="submit" class="btn btn-dark btn-sm m-1">DELETE</button>
+                                            class="btn btn-dark btn-sm m-1"><i class="fas fa-user-edit"></i></a>
+                                        <button type="submit" class="btn btn-dark btn-sm m-1"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </form>
                             </div>

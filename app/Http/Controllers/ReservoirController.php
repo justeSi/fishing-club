@@ -58,13 +58,12 @@ class ReservoirController extends Controller
         }
         $reservoir = new Reservoir;
         
-        // $member->name = mb_convert_case($request->reservoir_title, MB_CASE_TITLE, 'UTF-8');
         
         $reservoir->title = mb_convert_case($request->reservoir_title, MB_CASE_TITLE, 'UTF-8');
         $reservoir->area = $request->reservoir_area;
         $reservoir->about = $request->reservoir_about;
         $reservoir->save();
-        return redirect()->route('reservoir.index')->with('success_message', 'Sekmingai įrašytas.');
+        return redirect()->route('reservoir.index')->with('success_message', 'Successfully created.');
     }
 
     /**
@@ -110,13 +109,12 @@ class ReservoirController extends Controller
             return redirect()->back()->withErrors($validator);
         }
         
-        // $member->name = mb_convert_case($request->reservoir_title, MB_CASE_TITLE, 'UTF-8');
         
         $reservoir->title = mb_convert_case($request->reservoir_title, MB_CASE_TITLE, 'UTF-8');
         $reservoir->area = $request->reservoir_area;
         $reservoir->about = $request->reservoir_about;
         $reservoir->save();
-        return redirect()->route('reservoir.index')->with('success_message', 'Sėkmingai pakeistas.');
+        return redirect()->route('reservoir.index')->with('success_message', 'Successfully updated.');
     }
 
     /**
@@ -128,10 +126,10 @@ class ReservoirController extends Controller
     public function destroy(Reservoir $reservoir)
     {
         if($reservoir->getMembers->count()){
-            return redirect()->back()->with('info_message', 'Trinti negalima, nes turi knygų.');
+            return redirect()->back()->with('info_message', 'Not allowed, reservoir has members');
         }
         $reservoir->delete();
-        return redirect()->route('reservoir.index')->with('success_message', 'Sekmingai ištrintas.');
+        return redirect()->route('reservoir.index')->with('success_message', 'Successfully removed.');
     }
     public function pdf(Reservoir $reservoir)
     {
