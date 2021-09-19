@@ -20,10 +20,14 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $members = Member::all();
-        return view('member.index', ['members' => $members]);
+        $members = Member::orderBy('surname')->get();
+        $reservoirs = Reservoir::orderBy('title')->get();
+        if ($request->filter && 'reservoir' == $request->filter) {
+            $members = Member::where('reservoir_id', $request->reservoir_id)->get();
+        }
+        return view('member.index', ['members' => $members, 'reservoirs' => $reservoirs, 'reservoir_id' => $request->reservoir_id ?? '0']);
     }
 
     /**
@@ -33,7 +37,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        $reservoirs = Reservoir::all();
+        $reservoirs = Reservoir::orderBy('title')->get();
         return view('member.create', ['reservoirs' => $reservoirs]);
     }
 

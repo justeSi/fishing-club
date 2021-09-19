@@ -23,7 +23,7 @@ class ReservoirController extends Controller
      */
     public function index()
     {
-        $reservoirs = Reservoir::all();
+        $reservoirs = Reservoir::orderBy('area')->get();
         return view('reservoir.index', ['reservoirs' => $reservoirs]);
     }
 
@@ -134,7 +134,8 @@ class ReservoirController extends Controller
     }
     public function pdf(Reservoir $reservoir)
     {
-        $pdf = PDF::loadView('reservoir.pdf', ['reservoir' => $reservoir]);
+        $members = Member::all();
+        $pdf = PDF::loadView('reservoir.pdf', ['reservoir' => $reservoir, 'members' => $members]);
         return $pdf->download(ucfirst($reservoir->title).'.pdf');
     }
 
